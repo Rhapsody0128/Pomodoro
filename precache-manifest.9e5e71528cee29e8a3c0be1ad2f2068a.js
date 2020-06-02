@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "alarms/nofeel.mp3"
   },
   {
-    "revision": "5e5922a8d48bd52aa953",
+    "revision": "a7ab923c06f7c4373f84",
     "url": "css/app.6a435af8.css"
   },
   {
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "fonts/noto-sans-tc-latin-900-normal.c30c9139.woff2"
   },
   {
-    "revision": "26cad571951e4ef3d2c8a62ca872763b",
+    "revision": "a4cde626824693c28a1a2e744f899aee",
     "url": "index.html"
   },
   {
-    "revision": "5e5922a8d48bd52aa953",
-    "url": "js/app.7e5af538.js"
+    "revision": "a7ab923c06f7c4373f84",
+    "url": "js/app.ce34d87a.js"
   },
   {
     "revision": "37f2026172de1bb204bf",
