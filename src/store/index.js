@@ -3,19 +3,19 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
-const timeleft = parseInt(process.env.VUE_APP_TIMELEFT)
-const timeleftBreak = parseInt(process.env.VUE_APP_TIMELEFT_BREAK)
+const settimeleft = parseInt(process.env.VUE_APP_TIMELEFT)
+const settimeBreak = parseInt(process.env.VUE_APP_TIMELEFT_BREAK)
 
 export default new Vuex.Store({
   state: {
     todos: [],
-    timeleft: timeleft,
+    timeleft: settimeleft,
     alarm: 'nofeel.mp3',
     current: '',
     isBreak: false,
     src: 'red',
-    totaltime: timeleft,
-    totaltimebreak: timeleftBreak
+    totaltime: settimeleft,
+    totaltimebreak: settimeBreak
   },
   getters: {
     alarm (state) {
@@ -84,38 +84,37 @@ export default new Vuex.Store({
         state.isBreak = !state.isBreak
       }
       state.current = ''
-      if (state.isBreak) {
+      if (!state.isBreak) {
         state.timeleft = state.totaltime
         return state.timeleft
       } else {
         state.timeleft = state.totaltimebreak
-        state.totaltime = state.totaltimebreak
         return [state.timeleft, state.totaltimebreak]
       }
     },
     timeminus (state) {
-      if (state.totaltime > 1) {
-        state.totaltime--
+      if (state.totaltime > settimeleft / 5) {
+        state.totaltime -= 60
         state.timeleft = state.totaltime
         return [state.totaltime, state.timeleft]
       } else { return [state.totaltime, state.timeleft] }
     },
     timeplus (state) {
-      if (state.totaltime < 30) {
-        state.totaltime++
+      if (state.totaltime < settimeleft * 6) {
+        state.totaltime += 60
         state.timeleft = state.totaltime
         return [state.totaltime, state.timeleft]
       } else { return [state.totaltime, state.timeleft] }
     },
     timebreakminus (state) {
-      if (state.totaltimebreak > 1) {
-        state.totaltimebreak--
+      if (state.totaltimebreak > settimeBreak / 5) {
+        state.totaltimebreak -= 60
         return state.totaltimebreak
       } else { return state.totaltimebreak }
     },
     timebreakplus (state) {
-      if (state.totaltimebreak < 25) {
-        state.totaltimebreak++
+      if (state.totaltimebreak < settimeBreak * 6) {
+        state.totaltimebreak += 60
         return state.totaltimebreak
       } else {
         return state.totaltimebreak

@@ -2,7 +2,7 @@
   <div id="home">
     <h1>{{currentText}}</h1>
     <div id="clock" class="d-flex w-75 m-auto">
-      <div id="totaltimebreakadjust" class='col-4'>
+      <div id="totaltimebreakadjust">
         <b-btn class="h-25 m-auto " variant='none'   @click="timebreakadjust('minus')">
         <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
@@ -12,19 +12,31 @@
         </b-btn>
       </div>
 
-      <radial-progress-bar class="m-auto col-4"    :diameter="400" :completed-steps="timeleft"    :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444" isClockwise="false">
-      <b-btn variant='primary' v-if='status!=1' @click='start' >
-      <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
-      </b-btn>
-      <b-btn  variant='danger' v-if='status==1' @click='pause'>
-      <font-awesome-icon :icon="['fas','pause']" ></font-awesome-icon>
-      </b-btn>
-      <b-btn  variant='success' v-if='current.length > 0 || todos.length > 0' @click="finish(true)">
-      <font-awesome-icon :icon="['fas','step-forward']" ></font-awesome-icon>
-      </b-btn>
-      {{timetext}}
+      <radial-progress-bar v-if="!isBreak" class="m-auto" :diameter="400" :completed-steps="timeleft" :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444">
+          <b-btn variant='primary' v-if='status!=1'     @click='start' >
+          <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn  variant='danger' v-if='status==1'     @click='pause'>
+          <font-awesome-icon :icon="['fas','pause']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn  variant='success' v-if='current.length > 0    || todos.length > 0' @click="finish(true)">
+          <font-awesome-icon :icon="['fas','step-forward']"     ></font-awesome-icon>
+          </b-btn>
+          {{timetext}}
       </radial-progress-bar>
-      <div class="col-4" id="totaltimeadjust">
+      <radial-progress-bar v-else class="m-auto" :diameter="400" :completed-steps="timeleft" :total-steps="totaltimebreak" startColor="#ccc"   stopColor="#c11" innerStrokeColor="#333">
+          <b-btn variant='primary' v-if='status!=1'     @click='start' >
+          <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn  variant='danger' v-if='status==1'     @click='pause'>
+          <font-awesome-icon :icon="['fas','pause']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn  variant='success' v-if='current.length > 0    || todos.length > 0' @click="finish(true)">
+          <font-awesome-icon :icon="['fas','step-forward']"     ></font-awesome-icon>
+          </b-btn>
+          {{timetext}}
+      </radial-progress-bar>
+      <div id="totaltimeadjust">
         <b-btn class="h-25 m-auto" variant='none'   @click="timeadjust('minus')">
         <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
@@ -78,6 +90,9 @@ export default {
     },
     totaltimebreak () {
       return this.$store.getters.totaltimebreak
+    },
+    isBreak () {
+      return this.$store.getters.isBreak
     }
 
   },
