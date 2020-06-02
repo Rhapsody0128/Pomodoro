@@ -2,18 +2,17 @@
   <div id="home">
     <h1>{{currentText}}</h1>
     <div id="clock" class="d-flex w-75 m-auto">
-
-      <div id="totaltimeadjust">
-        <b-btn class="h-25 m-auto" variant='none'   @click="timeadjust('minus')">
+      <div id="totaltimebreakadjust" class='col-4'>
+        <b-btn class="h-25 m-auto " variant='none'   @click="timebreakadjust('minus')">
         <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
-        工作時間:{{totaltime}}
+        休息時間:{{totaltimebreak}}
         <b-btn class="h-25 m-auto" variant='none'>
-          <font-awesome-icon @click="timeadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
+          <font-awesome-icon @click="timebreakadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
       </div>
 
-      <radial-progress-bar class="m-auto"    :diameter="400" :completed-steps="timeleft"    :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444">
+      <radial-progress-bar class="m-auto col-4"    :diameter="400" :completed-steps="timeleft"    :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444" isClockwise="false">
       <b-btn variant='primary' v-if='status!=1' @click='start' >
       <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
       </b-btn>
@@ -23,12 +22,9 @@
       <b-btn  variant='success' v-if='current.length > 0 || todos.length > 0' @click="finish(true)">
       <font-awesome-icon :icon="['fas','step-forward']" ></font-awesome-icon>
       </b-btn>
-      <!-- {{timetext}} -->
-      {{timeleft}}
-      {{totaltime}}
+      {{timetext}}
       </radial-progress-bar>
-
-      <div id="totaltimeadjust">
+      <div class="col-4" id="totaltimeadjust">
         <b-btn class="h-25 m-auto" variant='none'   @click="timeadjust('minus')">
         <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
@@ -37,12 +33,12 @@
           <font-awesome-icon @click="timeadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import RadialProgressBar from 'vue-radial-progress'
 
 export default {
 
@@ -79,6 +75,9 @@ export default {
     },
     totaltime () {
       return this.$store.getters.totaltime
+    },
+    totaltimebreak () {
+      return this.$store.getters.totaltimebreak
     }
 
   },
@@ -135,10 +134,16 @@ export default {
           this.$store.commit('timeplus')
         }
       }
+    },
+    timebreakadjust (i) {
+      if (this.status !== 1) {
+        if (i === 'minus') {
+          this.$store.commit('timebreakminus')
+        } else {
+          this.$store.commit('timebreakplus')
+        }
+      }
     }
-  },
-  components: {
-    RadialProgressBar
   }
 }
 </script>

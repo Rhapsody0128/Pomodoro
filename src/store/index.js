@@ -14,7 +14,8 @@ export default new Vuex.Store({
     current: '',
     isBreak: false,
     src: 'red',
-    totaltime: timeleft
+    totaltime: timeleft,
+    totaltimebreak: timeleftBreak
   },
   getters: {
     alarm (state) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
     },
     totaltime (state) {
       return state.totaltime
+    },
+    totaltimebreak (state) {
+      return state.totaltimebreak
     }
   },
   mutations: {
@@ -80,19 +84,42 @@ export default new Vuex.Store({
         state.isBreak = !state.isBreak
       }
       state.current = ''
-      state.timeleft = state.isBreak ? timeleftBreak : timeleft
+      if (state.isBreak) {
+        state.timeleft = state.totaltime
+        return state.timeleft
+      } else {
+        state.timeleft = state.totaltimebreak
+        state.totaltime = state.totaltimebreak
+        return [state.timeleft, state.totaltimebreak]
+      }
     },
     timeminus (state) {
-      if (state.totaltime > 2) {
+      if (state.totaltime > 1) {
         state.totaltime--
-        return state.totaltime
-      } else { return state.totaltime }
+        state.timeleft = state.totaltime
+        return [state.totaltime, state.timeleft]
+      } else { return [state.totaltime, state.timeleft] }
     },
     timeplus (state) {
-      if (state.totaltime < 50) {
+      if (state.totaltime < 30) {
         state.totaltime++
-        return state.totaltime
-      } else { return state.totaltime }
+        state.timeleft = state.totaltime
+        return [state.totaltime, state.timeleft]
+      } else { return [state.totaltime, state.timeleft] }
+    },
+    timebreakminus (state) {
+      if (state.totaltimebreak > 1) {
+        state.totaltimebreak--
+        return state.totaltimebreak
+      } else { return state.totaltimebreak }
+    },
+    timebreakplus (state) {
+      if (state.totaltimebreak < 25) {
+        state.totaltimebreak++
+        return state.totaltimebreak
+      } else {
+        return state.totaltimebreak
+      }
     }
   },
   actions: {
