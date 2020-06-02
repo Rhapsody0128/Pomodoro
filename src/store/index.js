@@ -12,7 +12,9 @@ export default new Vuex.Store({
     timeleft: timeleft,
     alarm: 'nofeel.mp3',
     current: '',
-    isBreak: false
+    isBreak: false,
+    src: 'red',
+    totaltime: timeleft
   },
   getters: {
     alarm (state) {
@@ -29,8 +31,10 @@ export default new Vuex.Store({
     },
     isBreak (state) {
       return state.isBreak
+    },
+    totaltime (state) {
+      return state.totaltime
     }
-
   },
   mutations: {
     selectAlarm (state, data) {
@@ -77,8 +81,19 @@ export default new Vuex.Store({
       }
       state.current = ''
       state.timeleft = state.isBreak ? timeleftBreak : timeleft
+    },
+    timeminus (state) {
+      if (state.totaltime > 2) {
+        state.totaltime--
+        return state.totaltime
+      } else { return state.totaltime }
+    },
+    timeplus (state) {
+      if (state.totaltime < 50) {
+        state.totaltime++
+        return state.totaltime
+      } else { return state.totaltime }
     }
-
   },
   actions: {
   },
