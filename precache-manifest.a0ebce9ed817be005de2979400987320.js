@@ -12,16 +12,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "alarms/nofeel.mp3"
   },
   {
-    "revision": "a7ab923c06f7c4373f84",
-    "url": "css/app.6a435af8.css"
+    "revision": "d907dcd4c14b5ff8e0ff",
+    "url": "css/app.cadc5783.css"
   },
   {
-    "revision": "37f2026172de1bb204bf",
+    "revision": "ebe3cb2ad600ed88b27e",
     "url": "css/chunk-vendors.0b7d78b7.css"
   },
   {
-    "revision": "ed652a836b0f6245875c",
-    "url": "css/list.2d80de73.css"
+    "revision": "2068449423b987b27651",
+    "url": "css/list.5379c6b4.css"
   },
   {
     "revision": "d207509587c90a7654cf1fcc2a4a4ce0",
@@ -120,28 +120,44 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "fonts/noto-sans-tc-latin-900-normal.c30c9139.woff2"
   },
   {
-    "revision": "a4cde626824693c28a1a2e744f899aee",
+    "revision": "28b465e25ed730fdc9c3231d6299dce6",
+    "url": "img/2972344.28b465e2.svg"
+  },
+  {
+    "revision": "28b465e25ed730fdc9c3231d6299dce6",
+    "url": "img/2972344.svg"
+  },
+  {
+    "revision": "d23e5c6ce4d51f0cf6c1e54ae4de2e50",
+    "url": "img/strategy.d23e5c6c.svg"
+  },
+  {
+    "revision": "d23e5c6ce4d51f0cf6c1e54ae4de2e50",
+    "url": "img/strategy.svg"
+  },
+  {
+    "revision": "9f170967bedcd10eecfb790400411510",
     "url": "index.html"
   },
   {
-    "revision": "a7ab923c06f7c4373f84",
-    "url": "js/app.ce34d87a.js"
+    "revision": "d907dcd4c14b5ff8e0ff",
+    "url": "js/app.2c77b31e.js"
   },
   {
-    "revision": "37f2026172de1bb204bf",
-    "url": "js/chunk-vendors.beacfbb1.js"
+    "revision": "ebe3cb2ad600ed88b27e",
+    "url": "js/chunk-vendors.3a2f1abc.js"
   },
   {
-    "revision": "ed652a836b0f6245875c",
-    "url": "js/list.6dfbb221.js"
+    "revision": "2068449423b987b27651",
+    "url": "js/list.5defac46.js"
   },
   {
-    "revision": "ad78b4ca64276cb383de",
-    "url": "js/notfound.34c2ebe9.js"
+    "revision": "caa52c825f248b9e4c9d",
+    "url": "js/notfound.a89b9485.js"
   },
   {
-    "revision": "74472757219b1ca424fe",
-    "url": "js/settings.f64682bb.js"
+    "revision": "32b144de088f2f329483",
+    "url": "js/settings.086958f6.js"
   },
   {
     "revision": "982672f70a8ae0b8927c7e9ed7d470cb",
