@@ -1,5 +1,5 @@
 <template>
-  <div id="list">
+  <div id="list" class="container">
     <b-form-input @keydown.enter='addtodo' v-model="newtodo"></b-form-input>
     <br>
     <b-btn variant="success" @click='addtodo' >新增</b-btn>

@@ -8,7 +8,7 @@ import router from './router'
 import store from './store'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faCheck, faPen, faTimes, faUndo, faSave, faPlay, faPause, faStepForward, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faMusic, faClipboardList, faClock, faCheck, faPen, faTimes, faUndo, faSave, faPlay, faPause, faStepForward, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
 import RadialProgressBar from 'vue-radial-progress'
 import draggable from 'vuedraggable'
 
@@ -20,7 +20,7 @@ Vue.use(VueGtag, {
   config: { id: 'UA-168189069-1' }
 })
 
-library.add(faCheck, faPen, faTimes, faUndo, faSave, faPlay, faPause, faStepForward, faPlus, faMinus)
+library.add(faMusic, faClipboardList, faClock, faCheck, faPen, faTimes, faUndo, faSave, faPlay, faPause, faStepForward, faPlus, faMinus)
 
 // 註冊元件
 Vue.component('font-awesome-icon', FontAwesomeIcon)

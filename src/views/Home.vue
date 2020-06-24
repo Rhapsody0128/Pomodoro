@@ -1,18 +1,29 @@
 <template>
   <div id="home">
     <h1>{{currentText}}</h1>
-    <div id="clock" class="d-flex w-75 m-auto">
-      <div id="totaltimebreakadjust">
-        <b-btn class="h-25 m-auto " variant='none'   @click="timebreakadjust('minus')">
-        <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
+    <div id="clock" class="d-flex w-100 p-0 m-auto container flex-wrap">
+      <div id="totaltimebreakadjust" class="d-flex col-12 col-lg-3 flex-lg-column justify-content-between">
+        <b-btn variant='none'>
+          <font-awesome-icon color='purple' @click="timebreakadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
-        休息時間:{{totaltimebreak}}
-        <b-btn class="h-25 m-auto" variant='none'>
-          <font-awesome-icon @click="timebreakadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
+        <span class="text-success shadow-lg border rounded">Break:{{totaltimebreak/60}}min</span>
+          <b-btn variant='none' @click="timebreakadjust('minus')">
+        <font-awesome-icon color='purple' :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
       </div>
-
-      <radial-progress-bar v-if="!isBreak" class="m-auto" :diameter="400" :completed-steps="timeleft" :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444">
+      <radial-progress-bar v-if="!isBreak" class="m-auto h-25  col-12 col-lg-4 p-0" :diameter="300" :completed-steps="timeleft" :total-steps="totaltime" startColor="#eee"   stopColor="#e74" innerStrokeColor="#444">
+          <b-btn variant='primary' v-if='status!=1' @click='start' >
+            <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn variant='danger' v-if='status==1'     @click='pause'>
+            <font-awesome-icon :icon="['fas','pause']" ></font-awesome-icon>
+          </b-btn>
+          <b-btn  variant='success' v-if='current.length > 0    || todos.length > 0' @click="finish(true)">
+            <font-awesome-icon :icon="['fas','step-forward']"     ></font-awesome-icon>
+          </b-btn>
+          <span class="bg-primary text-white shadow-lg border rounded">{{timetext}}</span>
+      </radial-progress-bar>
+      <radial-progress-bar v-else class="m-auto" :diameter="300" :completed-steps="timeleft" :total-steps="totaltimebreak" startColor="#ccc"   stopColor="#c11" innerStrokeColor="#333">
           <b-btn variant='primary' v-if='status!=1'     @click='start' >
           <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
           </b-btn>
@@ -24,25 +35,13 @@
           </b-btn>
           {{timetext}}
       </radial-progress-bar>
-      <radial-progress-bar v-else class="m-auto" :diameter="400" :completed-steps="timeleft" :total-steps="totaltimebreak" startColor="#ccc"   stopColor="#c11" innerStrokeColor="#333">
-          <b-btn variant='primary' v-if='status!=1'     @click='start' >
-          <font-awesome-icon :icon="['fas','play']" ></font-awesome-icon>
-          </b-btn>
-          <b-btn  variant='danger' v-if='status==1'     @click='pause'>
-          <font-awesome-icon :icon="['fas','pause']" ></font-awesome-icon>
-          </b-btn>
-          <b-btn  variant='success' v-if='current.length > 0    || todos.length > 0' @click="finish(true)">
-          <font-awesome-icon :icon="['fas','step-forward']"     ></font-awesome-icon>
-          </b-btn>
-          {{timetext}}
-      </radial-progress-bar>
-      <div id="totaltimeadjust">
-        <b-btn class="h-25 m-auto" variant='none'   @click="timeadjust('minus')">
-        <font-awesome-icon :icon="['fas','minus']"></font-awesome-icon>
+      <div id="totaltimeadjust" class="d-flex col-12 col-lg-3 flex-lg-column justify-content-between">
+        <b-btn  variant='none'>
+          <font-awesome-icon color='purple' @click="timeadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
-        工作時間:{{totaltime}}
-        <b-btn class="h-25 m-auto" variant='none'>
-          <font-awesome-icon @click="timeadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
+        <span class="text-success shadow-lg border rounded">Work:{{totaltime/60}}min</span>
+          <b-btn variant='none' @click="timeadjust('minus')">
+        <font-awesome-icon color='purple' :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
       </div>
 
@@ -61,7 +60,7 @@ export default {
       // 1 = 播放
       // 2 = 暫停
       status: 0,
-      tiemer: 0
+      timebreakrange: this.$store.totaltimebreak
     }
   },
   computed: {
@@ -71,7 +70,7 @@ export default {
     timetext () {
       const m = Math.floor(this.timeleft / 60)
       const s = Math.floor(this.timeleft % 60)
-      return `${m} : ${s}`
+      return `${m} min: ${s} sec`
     },
     alarm () {
       return this.$store.getters.alarm
@@ -94,7 +93,6 @@ export default {
     isBreak () {
       return this.$store.getters.isBreak
     }
-
   },
   methods: {
     start () {
@@ -139,6 +137,7 @@ export default {
     },
     pause () {
       clearInterval(this.timer)
+      console.log(this.body)
       this.status = 2
     },
     timeadjust (i) {

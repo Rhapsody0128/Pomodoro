@@ -1,10 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">番茄鐘</router-link>|
-      <router-link to="/list">待辦清單</router-link>|
-      <router-link to="/settings">鈴聲設定</router-link>|
-      <router-link to="/finish">今日完成</router-link>
+      <router-link to="/"><font-awesome-icon size='lg' :icon="['fas','clock']"></font-awesome-icon></router-link>
+      <router-link to="/list"><font-awesome-icon size='lg' :icon="['fas','clipboard-list']"></font-awesome-icon></router-link>
+      <router-link to="/settings"><font-awesome-icon size='lg' :icon="['fas','music']"></font-awesome-icon></router-link>
     </div>
     <keep-alive>
       <router-view />

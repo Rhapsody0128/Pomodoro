@@ -93,33 +93,42 @@ export default new Vuex.Store({
       }
     },
     timeminus (state) {
-      if (state.totaltime > settimeleft / 25) {
-        state.totaltime -= settimeleft / 25
-        state.timeleft = state.totaltime
-        return [state.totaltime, state.timeleft]
-      } else { return [state.totaltime, state.timeleft] }
+      if (!state.isBreak) {
+        if (state.totaltime > settimeleft / 25) {
+          state.totaltime -= settimeleft / 25
+          state.timeleft = state.totaltime
+          return [state.totaltime, state.timeleft]
+        } else { return [state.totaltime, state.timeleft] }
+      }
     },
     timeplus (state) {
-      if (state.totaltime < settimeleft * 1.2) {
-        state.totaltime += settimeleft / 25
-        state.timeleft = state.totaltime
-        return [state.totaltime, state.timeleft]
-      } else { return [state.totaltime, state.timeleft] }
+      if (!state.isBreak) {
+        if (state.totaltime < settimeleft * 1.2) {
+          state.totaltime += settimeleft / 25
+          state.timeleft = state.totaltime
+          return [state.totaltime, state.timeleft]
+        } else { return [state.totaltime, state.timeleft] }
+      }
     },
     timebreakminus (state) {
-      if (state.totaltimebreak > settimeBreak / 25) {
-        state.totaltimebreak -= settimeleft / 25
+      if (state.totaltimebreak > settimeBreak / 5) {
+        state.totaltimebreak -= settimeBreak / 5
         return state.totaltimebreak
       } else { return state.totaltimebreak }
     },
     timebreakplus (state) {
       if (state.totaltimebreak < settimeBreak * 1.2) {
-        state.totaltimebreak += settimeBreak / 25
+        state.totaltimebreak += settimeBreak / 5
         return state.totaltimebreak
       } else {
         return state.totaltimebreak
       }
+    },
+    change (state, song) {
+      state.alarm = song
+      return state.alarm
     }
+
   },
   actions: {
   },

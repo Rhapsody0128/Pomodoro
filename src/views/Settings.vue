@@ -1,11 +1,12 @@
 <template>
-  <div id="setting">
-    <b-table :items='items' :fields="fields">
-      <template v-slot:cell(preview)="data">
+  <div id="setting" class="container">
+    <b-table :items='items' :fields="fields" >
+      <template  v-slot:cell(preview)="data" >
         <audio controls :src="'./alarms/'+ data.item.file"></audio>
       </template>
       <template v-slot:cell(select)="data">
-        <font-awesome-icon v-if="data.item.file == alarm" :icon="['fas','check']"></font-awesome-icon>
+        <font-awesome-icon @click="change(data.index)" v-if="data.item.file == alarm" :icon="['fas','check']"></font-awesome-icon>
+        <font-awesome-icon @click="change(data.index)" v-else :icon="['fas','times']"></font-awesome-icon>
       </template>
     </b-table>
   </div>
@@ -53,6 +54,12 @@ export default {
         this.$store.commit('selectAlarm', item.file)
       }
 
+    }
+  },
+  methods: {
+    change (index) {
+      const song = this.items[index].file
+      this.$store.commit('change', song)
     }
   }
 }
