@@ -6,7 +6,7 @@
         <b-btn variant='none'>
           <font-awesome-icon color='purple' @click="timebreakadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
-        <span class="text-success shadow-lg border rounded">Break:{{totaltimebreak/60}}min</span>
+        <span class="shadow-lg rounded">Break:{{totaltimebreak/60}}min</span>
           <b-btn variant='none' @click="timebreakadjust('minus')">
         <font-awesome-icon color='purple' :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
@@ -39,7 +39,7 @@
         <b-btn  variant='none'>
           <font-awesome-icon color='purple' @click="timeadjust('plus')"  :icon="['fas','plus']"></font-awesome-icon>
         </b-btn>
-        <span class="text-success shadow-lg border rounded">Work:{{totaltime/60}}min</span>
+        <span class="shadow-lg rounded">Work:{{totaltime/60}}min</span>
           <b-btn variant='none' @click="timeadjust('minus')">
         <font-awesome-icon color='purple' :icon="['fas','minus']"></font-awesome-icon>
         </b-btn>
